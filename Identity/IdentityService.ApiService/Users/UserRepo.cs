@@ -1,4 +1,4 @@
-﻿using IdentityService.Domain.Users;
+﻿using IdentityService.ApiService.Users.Domain;
 
 namespace IdentityService.ApiService.Users;
 

@@ -2,8 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SharedLib\SharedLib.csproj" />
-    <ProjectReference Include="..\BasketService.Domain\BasketService.Domain.csproj" />
-    <ProjectReference Include="..\BasketService.ApiContracts\BasketService.ApiContracts.csproj" />
+    <ProjectReference Include="..\BasketService.Contracts\BasketService.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

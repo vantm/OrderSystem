@@ -1,8 +1,8 @@
 ﻿using Carter;
 using Carter.ModelBinding;
 
-using IdentityService.ApiContracts;
-using IdentityService.Domain.Users;
+using IdentityService.ApiService.Users.Domain;
+using IdentityService.Contracts;
 
 namespace IdentityService.ApiService.Users;
 

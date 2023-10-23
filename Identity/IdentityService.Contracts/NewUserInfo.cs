@@ -1,4 +1,4 @@
-﻿namespace IdentityService.ApiContracts;
+﻿namespace IdentityService.Contracts;
 
 public record NewUserInfo(
     string UserName,

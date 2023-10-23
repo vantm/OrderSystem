@@ -9,19 +9,25 @@ namespace IdentityService.ApiService.MassTransit;
 
 public sealed class Installer : IServiceInstaller
 {
-    public void AddServices(IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
+    public void AddServices(IServiceCollection services,
+        IConfiguration configuration, IHostEnvironment environment)
     {
+        services.AddOptions<GrpcTransportOptions>()
+            .BindConfiguration(GrpcTransportOptions.Name)
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         services.AddMassTransit(x =>
         {
-            x.AddConsumersFromNamespaceContaining<Program>();
-            x.AddSagasFromNamespaceContaining<Program>();
-            x.AddSagaStateMachinesFromNamespaceContaining<Program>();
-            x.AddActivitiesFromNamespaceContaining<Program>();
-            x.AddFuturesFromNamespaceContaining<Program>();
+            x.AddConsumersFromNamespaceContaining<ProjectRoot>();
+            x.AddSagaStateMachinesFromNamespaceContaining<ProjectRoot>();
+            x.AddActivitiesFromNamespaceContaining<ProjectRoot>();
+            x.AddFuturesFromNamespaceContaining<ProjectRoot>();
 
             x.UsingGrpc((ctx, cfg) =>
             {
-                var options = ctx.GetRequiredService<IOptions<GrpcTransportOptions>>();
+                var options =
+                    ctx.GetRequiredService<IOptions<GrpcTransportOptions>>();
 
                 cfg.Host(options.Value.Host, c =>
                 {
