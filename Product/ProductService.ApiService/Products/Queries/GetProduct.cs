@@ -12,9 +12,8 @@ namespace ProductService.ApiService.Products.Queries;
 
 public static class GetProduct
 {
-    public class Query : IRequest<ProductDto?>
+    public record Query(Guid Id) : IRequest<ProductDto?>
     {
-        public Guid Id { get; set; }
     }
 
     public class Validator : AbstractValidator<Query>

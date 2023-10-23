@@ -1,6 +1,6 @@
 ﻿namespace ProductService.Contracts.Products;
 
-public record Product(
+public record ProductModel(
     Guid Id,
     string Name,
     DateTime CreatedAt,

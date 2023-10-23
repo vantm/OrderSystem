@@ -1,4 +1,4 @@
-﻿namespace IdentityService.Domain.Users;
+﻿namespace IdentityService.ApiService.Users.Domain;
 
 public interface IUserRepo
 {

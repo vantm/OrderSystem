@@ -8,11 +8,51 @@ public class ProductItem : Entity
     public Guid ProductId { get; private set; }
     public decimal Price { get; private set; }
     public int Quantity { get; private set; }
-
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-    public static ProductItem CreateForProduct(Guid productId, decimal price, int quantity)
+    public void Adjust(int adjustedValue)
+    {
+        var previousQuantity = Quantity;
+
+        Quantity += adjustedValue;
+        UpdatedAt = DateTime.UtcNow;
+
+        var domainEvent = new ProductItemAdjustedDomainEvent()
+        {
+            Id = Id,
+            ProductId = ProductId,
+            PreviousQuantity = previousQuantity,
+            Quantity = Quantity,
+            UpdatedAt = UpdatedAt
+        };
+
+        AddDomainEvent(domainEvent);
+    }
+
+    public void Update(decimal price)
+    {
+        var previousPrice = Price;
+
+        Price = price;
+        UpdatedAt = DateTime.UtcNow;
+
+        var domainEvent = new ProductItemUpdatedDomainEvent()
+        {
+            Id = Id,
+            ProductId = ProductId,
+            PreviousPrice = previousPrice,
+            Price = Price,
+            UpdatedAt = UpdatedAt
+        };
+
+        AddDomainEvent(domainEvent);
+    }
+
+    public static ProductItem CreateForProduct(
+        Guid productId,
+        decimal price,
+        int quantity)
     {
         var item = new ProductItem()
         {
@@ -24,7 +64,7 @@ public class ProductItem : Entity
             UpdatedAt = DateTime.UtcNow
         };
 
-        var domainEvent = new ProductCreatedDomainEvent()
+        var domainEvent = new ProductItemCreatedDomainEvent()
         {
             Id = item.Id,
             ProductId = item.ProductId,

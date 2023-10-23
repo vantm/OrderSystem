@@ -3,6 +3,8 @@ using Carter.ModelBinding;
 
 using MediatR;
 
+using ProductService.ApiService.Products.Domain;
+using ProductService.ApiService.Products.Helpers;
 using ProductService.ApiService.Products.Models;
 using ProductService.ApiService.Products.Queries;
 

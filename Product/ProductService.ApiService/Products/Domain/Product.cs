@@ -4,7 +4,7 @@ using ProductService.ApiService.Products.DomainEvents;
 
 using SharedLib.Domain;
 
-namespace ProductService.ApiService.Products;
+namespace ProductService.ApiService.Products.Domain;
 
 public class Product : Entity
 {
@@ -76,18 +76,18 @@ public class Product : Entity
     {
         var sb = new StringBuilder();
 
-        sb.Append("Product(");
+        sb.Append("Product { ");
 
-        const string fmt = "{0}='{1}';";
+        const string fmt = "{0} = {1}, ";
 
         sb.AppendFormat(fmt, nameof(Id), Id);
         sb.AppendFormat(fmt, nameof(Name), Name);
         sb.AppendFormat(fmt, nameof(Image),
-            $"bytearray(len:{Image.Length})");
+            $"byte[{Image.Length}]");
         sb.AppendFormat(fmt, nameof(CreatedAt), CreatedAt);
         sb.AppendFormat(fmt, nameof(UpdatedAt), UpdatedAt);
 
-        sb.Append(')');
+        sb.Append(" }");
 
         return sb.ToString();
     }

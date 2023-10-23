@@ -2,8 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SharedLib\SharedLib.csproj" />
-    <ProjectReference Include="..\ProductService.Domain\ProductService.Domain.csproj" />
-    <ProjectReference Include="..\ProductService.ApiContracts\ProductService.ApiContracts.csproj" />
+    <ProjectReference Include="..\ProductService.Contracts\ProductService.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,11 +2,11 @@
 
 namespace ProductService.ApiService.Inventory;
 
-public record ProductItemCreatedDomainEvent : INotification
+public record ProductItemUpdatedDomainEvent : INotification
 {
     public required Guid Id { get; init; }
     public required Guid ProductId { get; init; }
+    public required decimal PreviousPrice { get; init; }
     public required decimal Price { get; init; }
-    public required int Quantity { get; init; }
-    public DateTime CreatedAt { get; init; }
+    public DateTime UpdatedAt { get; init; }
 }

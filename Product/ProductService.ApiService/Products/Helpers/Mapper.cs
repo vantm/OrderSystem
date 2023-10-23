@@ -1,6 +1,7 @@
-﻿using ProductService.ApiService.Products.Models;
+﻿using ProductService.ApiService.Products.Domain;
+using ProductService.ApiService.Products.Models;
 
-namespace ProductService.ApiService.Products;
+namespace ProductService.ApiService.Products.Helpers;
 
 public static class Mapper
 {

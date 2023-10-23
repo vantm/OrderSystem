@@ -1,4 +1,6 @@
-﻿using SharedLib.DependencyInjection;
+﻿using ProductService.ApiService.Products.Domain;
+
+using SharedLib.DependencyInjection;
 using SharedLib.Domain;
 
 namespace ProductService.ApiService.Products;

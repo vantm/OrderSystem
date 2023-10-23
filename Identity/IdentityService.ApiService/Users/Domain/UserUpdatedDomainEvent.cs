@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace IdentityService.Domain.Users;
+namespace IdentityService.ApiService.Users.Domain;
 
 public class UserUpdatedDomainEvent : INotification
 {

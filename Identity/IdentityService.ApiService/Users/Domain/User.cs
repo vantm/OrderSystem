@@ -1,17 +1,16 @@
-﻿using SharedLib;
-using SharedLib.Domain;
+﻿using SharedLib.Domain;
 
-namespace IdentityService.Domain.Users;
+namespace IdentityService.ApiService.Users.Domain;
 
 public class User : Entity
 {
     public Guid Id { get; private set; }
-    public string UserName { get; set; } = default!;
-    public string PasswordHash { get; set; } = default!;
-    public string PasswordSalt { get; set; } = default!;
-    public string FullName { get; set; } = default!;
-    public string EmailAddress { get; set; } = default!;
-    public bool IsActive { get; set; }
+    public string UserName { get; private set; } = default!;
+    public byte[] PasswordHash { get; private set; } = default!;
+    public byte[] PasswordSalt { get; private set; } = default!;
+    public string FullName { get; private set; } = default!;
+    public string EmailAddress { get; private set; } = default!;
+    public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
     public DateTime? DeletedAt { get; private set; }
@@ -27,8 +26,8 @@ public class User : Entity
         {
             Id = Guid.NewGuid(),
             UserName = userName.Value,
-            PasswordHash = password.Hash,
-            PasswordSalt = password.Salt,
+            PasswordHash = password.PassHash,
+            PasswordSalt = password.PassHash,
             FullName = fullName.Value,
             EmailAddress = emailAddress.Value,
             IsActive = isActive,
@@ -50,7 +49,7 @@ public class User : Entity
         }
 
         var previousFullName = FullName;
-        var previousIsActive = isActive;
+        var previousIsActive = IsActive;
 
         FullName = fullName.Value;
         IsActive = isActive;

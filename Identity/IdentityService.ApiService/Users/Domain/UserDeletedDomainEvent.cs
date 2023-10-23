@@ -1,19 +1,23 @@
 ﻿using MediatR;
 
-namespace IdentityService.Domain.Users;
+namespace IdentityService.ApiService.Users.Domain;
 
-public record UserCreatedDomainEvent : INotification
+public class UserDeletedDomainEvent : INotification
 {
     public required Guid Id { get; init; }
     public required string UserName { get; init; }
     public required string FullName { get; init; }
     public required string EmailAddress { get; init; }
     public required bool IsActive { get; init; }
-    public required DateTime CreatedAt { get; init; }
+    public required DateTime DeletedAt { get; init; }
 
-
-    public static UserCreatedDomainEvent FromEntity(User user)
+    public static UserDeletedDomainEvent FromEntity(User user)
     {
+        if (!user.DeletedAt.HasValue)
+        {
+            throw new InvalidOperationException("User wasn't marked as deleted");
+        }
+
         return new()
         {
             Id = user.Id,
@@ -21,7 +25,7 @@ public record UserCreatedDomainEvent : INotification
             FullName = user.FullName,
             EmailAddress = user.EmailAddress,
             IsActive = user.IsActive,
-            CreatedAt = user.CreatedAt
+            DeletedAt = user.DeletedAt.Value
         };
     }
 }

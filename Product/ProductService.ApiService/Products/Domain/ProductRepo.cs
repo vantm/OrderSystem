@@ -5,7 +5,7 @@ using MediatR;
 using SharedLib.Data;
 using SharedLib.Domain;
 
-namespace ProductService.ApiService.Products;
+namespace ProductService.ApiService.Products.Domain;
 
 public class ProductRepo(
         OpenDbConnection openConnection,
