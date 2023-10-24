@@ -4,6 +4,7 @@ using MediatR;
 
 using SharedLib.Data;
 using SharedLib.Domain;
+using SharedLib.Logging;
 
 namespace ProductService.ApiService.Products.Domain;
 

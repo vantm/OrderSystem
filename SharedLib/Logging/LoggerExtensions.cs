@@ -1,4 +1,6 @@
-﻿namespace ProductService.ApiService;
+﻿using Microsoft.Extensions.Logging;
+
+namespace SharedLib.Logging;
 
 public static partial class LoggerExtensions
 {

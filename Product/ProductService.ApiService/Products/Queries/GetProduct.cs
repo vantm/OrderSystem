@@ -8,6 +8,8 @@ using ProductService.ApiService.Products.Models;
 
 using SharedLib.Data;
 
+using LoggerExtensions = SharedLib.Logging.LoggerExtensions;
+
 namespace ProductService.ApiService.Products.Queries;
 
 public static class GetProduct
@@ -49,7 +51,7 @@ public static class GetProduct
 
             var param = new { id = request.Id };
 
-            ApiService.LoggerExtensions.LogSql(_logger, Sql, param);
+            LoggerExtensions.LogSql(_logger, Sql, param);
 
             var product =
                 await conn.QueryFirstOrDefaultAsync<ProductDto>(Sql, param);

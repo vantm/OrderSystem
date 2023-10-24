@@ -13,11 +13,11 @@ public sealed class Installer : IServiceInstaller
     {
         services.AddMassTransit(x =>
         {
-            x.AddConsumersFromNamespaceContaining<Program>();
-            x.AddSagasFromNamespaceContaining<Program>();
-            x.AddSagaStateMachinesFromNamespaceContaining<Program>();
-            x.AddActivitiesFromNamespaceContaining<Program>();
-            x.AddFuturesFromNamespaceContaining<Program>();
+            x.AddConsumersFromNamespaceContaining<ProjectRoot>();
+            x.AddSagasFromNamespaceContaining<ProjectRoot>();
+            x.AddSagaStateMachinesFromNamespaceContaining<ProjectRoot>();
+            x.AddActivitiesFromNamespaceContaining<ProjectRoot>();
+            x.AddFuturesFromNamespaceContaining<ProjectRoot>();
 
             x.UsingGrpc((ctx, cfg) =>
             {

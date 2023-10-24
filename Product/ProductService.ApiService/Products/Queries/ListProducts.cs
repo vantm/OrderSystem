@@ -8,6 +8,8 @@ using ProductService.ApiService.Products.Models;
 
 using SharedLib.Data;
 
+using LoggerExtensions = SharedLib.Logging.LoggerExtensions;
+
 namespace ProductService.ApiService.Products.Queries;
 
 public static class ListProducts
@@ -69,7 +71,7 @@ public static class ListProducts
                 offset = (pageIndex - 1) * pageSize, limit = pageSize
             };
 
-            ApiService.LoggerExtensions.LogSql(_logger, Sql, param);
+            LoggerExtensions.LogSql(_logger, Sql, param);
 
             var products = await conn.QueryAsync<ProductDto>(Sql, param);
 
