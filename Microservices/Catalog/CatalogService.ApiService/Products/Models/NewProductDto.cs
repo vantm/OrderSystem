@@ -1,20 +1,17 @@
-﻿namespace CatalogService.ApiService.Products.Models;
+﻿using FluentValidation;
 
-public record NewProductDto
+namespace CatalogService.ApiService.Products.Models;
+
+public record NewProductDto(string Name)
 {
-    public string Name { get; set; } = string.Empty;
-
-    public string? ImageBase64 { get; set; }
-
-    public byte[] ImageBuffer()
+    public class Validator : AbstractValidator<NewProductDto>
     {
-        var imageBuffer = Array.Empty<byte>();
-        if (!string.IsNullOrEmpty(ImageBase64))
+        public Validator()
         {
-            imageBuffer =
-                Convert.FromBase64String(ImageBase64);
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .MinimumLength(2)
+                .MaximumLength(200);
         }
-
-        return imageBuffer;
     }
 }

@@ -1,4 +1,4 @@
-﻿using CatalogService.ApiService.Products.Queries;
+﻿using CatalogService.ApiService.Products.Domain;
 
 using MassTransit;
 
@@ -10,19 +10,14 @@ using SharedLib.Contracts;
 
 namespace CatalogService.ApiService.Products.Consumers;
 
-public class ProductRequestConsumer : IConsumer<ProductRequest>
+public class ProductRequestConsumer
+    (IProductRepo repo) : IConsumer<ProductRequest>
 {
-    private readonly ISender _sender;
-
-    public ProductRequestConsumer(ISender sender)
-    {
-        _sender = sender;
-    }
-
     public async Task Consume(ConsumeContext<ProductRequest> context)
     {
-        var query = new GetProduct.Query(context.Message.Id);
-        var product = await _sender.Send(query, context.CancellationToken);
+        var product = await repo.QueryFindAsync(
+            context.Message.Id,
+            context.CancellationToken);
 
         if (product == null)
         {
@@ -30,7 +25,13 @@ public class ProductRequestConsumer : IConsumer<ProductRequest>
         }
         else
         {
-            await context.RespondAsync(product);
+            var model = new ProductModel(
+                product.Id,
+                product.Name,
+                product.CreatedAt,
+                product.UpdatedAt);
+
+            await context.RespondAsync(model);
         }
     }
 }

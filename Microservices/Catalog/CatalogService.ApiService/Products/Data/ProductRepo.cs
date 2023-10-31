@@ -1,4 +1,6 @@
-﻿using Dapper;
+﻿using CatalogService.ApiService.Products.Models;
+
+using Dapper;
 
 using MediatR;
 
@@ -12,7 +14,7 @@ public class ProductRepo(
         CreateDbConnection createConnection,
         IPublisher publisher,
         ILogger<ProductRepo> logger)
-    : IRepo<Product, Guid>
+    : IProductRepo
 {
     private async Task PublishDomainEvents(Product entity,
         CancellationToken cancellationToken)
@@ -110,5 +112,49 @@ public class ProductRepo(
         await conn.ExecuteAsync(sql, entity);
 
         await PublishDomainEvents(entity, cancellationToken);
+    }
+
+    public async Task<IEnumerable<ProductDto>> QueryAsync(int offset, int limit,
+        CancellationToken ct = default)
+    {
+        const string sql = """
+                           SELECT *
+                           FROM [Catalog].[Product]
+                           WHERE [IsDeleted] = 0
+                           ORDER BY [Id]
+                           OFFSET @offset ROWS
+                           FETCH NEXT @limit ROWS ONLY
+                           """;
+        using var conn = createConnection();
+
+        var param = new { offset = offset, limit = limit };
+
+        logger.LogSql(sql, param);
+
+        var products = await conn
+            .QueryAsync<ProductDto>(sql, param);
+
+        return products;
+    }
+
+    public async Task<ProductDto?> QueryFindAsync(Guid id,
+        CancellationToken ct = default)
+    {
+        const string sql = """
+                           SELECT *
+                           FROM [Catalog].[Product]
+                           WHERE [Id] = @id AND [IsDeleted] = 0
+                           """;
+
+        using var conn = createConnection();
+
+        var param = new { id = id };
+
+        logger.LogSql(sql, param);
+
+        var product =
+            await conn.QueryFirstOrDefaultAsync<ProductDto>(sql, param);
+
+        return product;
     }
 }

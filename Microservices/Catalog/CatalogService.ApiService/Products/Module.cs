@@ -4,11 +4,6 @@ using Carter.ModelBinding;
 using CatalogService.ApiService.Products.Domain;
 using CatalogService.ApiService.Products.Helpers;
 using CatalogService.ApiService.Products.Models;
-using CatalogService.ApiService.Products.Queries;
-
-using MediatR;
-
-using SharedLib.Domain;
 
 namespace CatalogService.ApiService.Products;
 
@@ -21,34 +16,31 @@ public sealed class Module : CarterModule
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("",
-                async ([AsParameters] ListProducts.Query query, ISender sender,
+                async ([AsParameters] PageDto page, IProductRepo repo,
                     HttpRequest req, CancellationToken ct) =>
                 {
-                    var result = req.Validate(query);
+                    var result = req.Validate(page);
                     if (!result.IsValid)
                     {
                         return Results.ValidationProblem(
                             result.GetValidationProblems());
                     }
 
-                    var products = await sender.Send(query, ct);
+                    var index = page.PageIndex ?? 1;
+                    var limit = page.PageSize ?? 20;
+                    var offset = (index - 1) * limit;
+
+                    var products = await repo.QueryAsync(
+                        offset, limit, ct);
                     return TypedResults.Ok(products);
                 })
             .WithName("ListProducts");
 
         app.MapGet("{id:guid}",
-                async ([AsParameters] GetProduct.Query query, ISender sender,
+                async (Guid id, IProductRepo repo,
                     HttpRequest req, CancellationToken ct) =>
                 {
-                    var result = req.Validate(query);
-                    if (!result.IsValid)
-                    {
-                        return Results.ValidationProblem(
-                            result.GetValidationProblems());
-                    }
-
-                    var product = await sender.Send(query, ct);
-
+                    var product = await repo.QueryFindAsync(id, ct);
                     return product == null
                         ? Results.NotFound()
                         : TypedResults.Ok(product);
@@ -56,7 +48,7 @@ public sealed class Module : CarterModule
             .WithName("GetProduct");
 
         app.MapPost("",
-                async (NewProductDto data, IRepo<Product, Guid> repo,
+                async (NewProductDto data, IProductRepo repo,
                     HttpRequest req, CancellationToken ct) =>
                 {
                     var result = req.Validate(data);
@@ -66,10 +58,7 @@ public sealed class Module : CarterModule
                             result.GetValidationProblems());
                     }
 
-                    var product = Product.Create(
-                        data.Name,
-                        data.ImageBuffer()
-                    );
+                    var product = Product.Create(data.Name);
 
                     await repo.InsertAsync(product, ct);
 
@@ -81,7 +70,7 @@ public sealed class Module : CarterModule
             .WithName("CreateProduct");
 
         app.MapPut("{id:guid}",
-                async (Guid id, NewProductDto data, IRepo<Product, Guid> repo,
+                async (Guid id, NewProductDto data, IProductRepo repo,
                     HttpRequest req, CancellationToken ct) =>
                 {
                     var result = req.Validate(data);
@@ -92,14 +81,12 @@ public sealed class Module : CarterModule
                     }
 
                     var product = await repo.FindAsync(id, ct);
-                    if (product == null || product.IsDeleted == true)
+                    if (product == null || product.IsDeleted)
                     {
                         return Results.NotFound();
                     }
 
-                    product.Update(
-                        data.Name,
-                        data.ImageBuffer());
+                    product.Update(data.Name);
 
                     await repo.UpdateAsync(product, ct);
 
@@ -108,7 +95,7 @@ public sealed class Module : CarterModule
             .WithName("UpdateProduct");
 
         app.MapDelete("{id:guid}",
-                async (Guid id, IRepo<Product, Guid> repo,
+                async (Guid id, IProductRepo repo,
                     CancellationToken ct) =>
                 {
                     var product = await repo.FindAsync(id, ct);

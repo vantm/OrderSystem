@@ -27,7 +27,7 @@ public class Product : Entity
         AddDomainEvent(domainEvent);
     }
 
-    public void Update(string name, byte[] image)
+    public void Update(string name)
     {
         var previousName = Name;
 
@@ -46,7 +46,7 @@ public class Product : Entity
         AddDomainEvent(domainEvent);
     }
 
-    public static Product Create(string name, byte[] image)
+    public static Product Create(string name)
     {
         var product = new Product()
         {
