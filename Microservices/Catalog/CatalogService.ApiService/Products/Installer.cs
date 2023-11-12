@@ -1,4 +1,5 @@
-﻿using CatalogService.ApiService.Products.Domain;
+﻿using CatalogService.ApiService.Products.Data;
+using CatalogService.ApiService.Products.Domain;
 
 using SharedLib.DependencyInjection;
 

@@ -1,5 +1,7 @@
 ﻿using Dapper;
 
+using InventoryService.ApiService.Batches.Domain;
+
 using MediatR;
 
 using SharedLib.Data;

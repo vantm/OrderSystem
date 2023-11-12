@@ -1,14 +1,14 @@
-﻿using CatalogService.ApiService.Products.Models;
+﻿using CatalogService.ApiService.Products.Domain;
+using CatalogService.ApiService.Products.Models;
 
 using Dapper;
 
 using MediatR;
 
 using SharedLib.Data;
-using SharedLib.Domain;
 using SharedLib.Logging;
 
-namespace CatalogService.ApiService.Products.Domain;
+namespace CatalogService.ApiService.Products.Data;
 
 public class ProductRepo(
         CreateDbConnection createConnection,

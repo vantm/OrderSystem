@@ -2,7 +2,7 @@
 
 namespace CatalogService.ApiService.Products.Models;
 
-public record NewProductDto(string Name)
+public sealed record NewProductDto(string Name)
 {
     public class Validator : AbstractValidator<NewProductDto>
     {

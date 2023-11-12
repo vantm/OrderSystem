@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace InventoryService.ApiService.Batches;
+namespace InventoryService.ApiService.Batches.DomainEvents;
 
 public record BatchUpdatedDomainEvent : INotification
 {

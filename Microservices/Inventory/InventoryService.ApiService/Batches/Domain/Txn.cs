@@ -1,4 +1,4 @@
-﻿namespace InventoryService.ApiService.Batches;
+﻿namespace InventoryService.ApiService.Batches.Domain;
 
 public class Txn
 {

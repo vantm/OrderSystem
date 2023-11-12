@@ -1,4 +1,6 @@
-﻿namespace InventoryService.ApiService.Batches;
+﻿using InventoryService.ApiService.Batches.Domain;
+
+namespace InventoryService.ApiService.Batches.Models;
 
 public record BatchDto
 {
@@ -9,14 +11,13 @@ public record BatchDto
     public required DateTime CreatedAt { get; init; }
     public required DateTime UpdatedAt { get; init; }
 
-    public static BatchDto FromEntity(Batch entity) =>
-        new()
-        {
-            Id = entity.Id,
-            ProductId = entity.ProductId,
-            Price = entity.Price,
-            Quantity = entity.Quantity,
-            CreatedAt = entity.CreatedAt,
-            UpdatedAt = entity.UpdatedAt
-        };
+    public static BatchDto FromEntity(Batch entity) => new()
+    {
+        Id = entity.Id,
+        ProductId = entity.ProductId,
+        Price = entity.Price,
+        Quantity = entity.Quantity,
+        CreatedAt = entity.CreatedAt,
+        UpdatedAt = entity.UpdatedAt
+    };
 }

@@ -1,6 +1,8 @@
-﻿using SharedLib.Domain;
+﻿using InventoryService.ApiService.Batches.DomainEvents;
 
-namespace InventoryService.ApiService.Batches;
+using SharedLib.Domain;
+
+namespace InventoryService.ApiService.Batches.Domain;
 
 public class Batch : Entity
 {
