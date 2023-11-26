@@ -52,7 +52,7 @@ mock.get<GetProductsResponse>(
 mock.get<GetProductByIdsResponse>(
   "/products/ids",
   (scheme, request) => {
-    const ids = request.queryParams["ids"];
+    const ids = request.queryParams["ids"] as string[];
     const allProducts = scheme.all("products");
     const items = chain(allProducts.models)
       .filter((x) => ids.includes(x.attrs.id))

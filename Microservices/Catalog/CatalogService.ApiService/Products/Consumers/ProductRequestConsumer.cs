@@ -1,10 +1,7 @@
 ﻿using CatalogService.ApiService.Products.Domain;
+using CatalogService.Contracts.Products;
 
 using MassTransit;
-
-using MediatR;
-
-using CatalogService.Contracts.Products;
 
 using SharedLib.Contracts;
 

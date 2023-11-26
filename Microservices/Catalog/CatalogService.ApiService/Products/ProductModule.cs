@@ -7,9 +7,9 @@ using CatalogService.ApiService.Products.Models;
 
 namespace CatalogService.ApiService.Products;
 
-public sealed class Module : CarterModule
+public sealed class ProductModule : CarterModule
 {
-    public Module() : base("/products")
+    public ProductModule() : base("/products")
     {
     }
 
