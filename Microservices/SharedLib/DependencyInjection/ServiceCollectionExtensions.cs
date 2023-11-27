@@ -6,16 +6,19 @@ namespace SharedLib.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddServiceInstallers(this IHostApplicationBuilder builder)
-        => builder.AddServiceInstallers(Assembly.GetEntryAssembly()!);
+    public static void AddServiceInstallers(
+        this IHostApplicationBuilder builder)
+        => builder.AddServiceInstallers(
+            Assembly.GetEntryAssembly()!,
+            Assembly.GetExecutingAssembly());
 
-    public static void AddServiceInstallers(this IHostApplicationBuilder builder, Assembly assembly)
+    private static void AddServiceInstallers(
+        this IHostApplicationBuilder builder, params Assembly[] assemblies)
     {
-        var installers = assembly
-            .GetTypes()
-            .Where(x => x.IsClass && !x.IsAbstract && x.IsAssignableTo(typeof(IServiceInstaller)))
+        var installers = assemblies
+            .SelectMany(x => x.GetTypes().Where(IsInstaller))
             .Select(Activator.CreateInstance)
-            .Cast<IServiceInstaller>()
+            .Cast<IServicesInstaller>()
             .ToArray();
 
         foreach (var installer in installers)
@@ -26,4 +29,8 @@ public static class ServiceCollectionExtensions
                 builder.Environment);
         }
     }
+
+    private static bool IsInstaller(Type x)
+        => x.IsClass && !x.IsAbstract &&
+           x.IsAssignableTo(typeof(IServicesInstaller));
 }

@@ -29,10 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryService.ApiService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryService.Contracts", "Inventory\InventoryService.Contracts\InventoryService.Contracts.csproj", "{D347022C-846C-4E87-AD5C-3958D4FB049F}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TypedResponses", "TypedResponses\TypedResponses.fsproj", "{6362EDEE-F9EA-4953-AD38-A2D8E6300EFD}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ConsoleFsharp", "ConsoleFsharp\ConsoleFsharp.fsproj", "{6A62A818-738D-484B-A6E2-A9CD6F100EA5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,14 +74,6 @@ Global
 		{D347022C-846C-4E87-AD5C-3958D4FB049F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D347022C-846C-4E87-AD5C-3958D4FB049F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D347022C-846C-4E87-AD5C-3958D4FB049F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6362EDEE-F9EA-4953-AD38-A2D8E6300EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6362EDEE-F9EA-4953-AD38-A2D8E6300EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6362EDEE-F9EA-4953-AD38-A2D8E6300EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6362EDEE-F9EA-4953-AD38-A2D8E6300EFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A62A818-738D-484B-A6E2-A9CD6F100EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A62A818-738D-484B-A6E2-A9CD6F100EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A62A818-738D-484B-A6E2-A9CD6F100EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A62A818-738D-484B-A6E2-A9CD6F100EA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8BA3785A-79D6-464C-9F32-E2D6EB920EC4} = {40151BAB-12F2-4FE4-8F18-7451A802A0AB}

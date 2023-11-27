@@ -2,7 +2,7 @@
 
 namespace OrderService.ApiService.HttpLogging;
 
-public sealed class Installer : IServiceInstaller
+public sealed class Installer : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration,

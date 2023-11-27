@@ -7,7 +7,7 @@ using SharedLib.Options;
 
 namespace CatalogService.ApiService.MassTransit;
 
-public sealed class Installer : IServiceInstaller
+public sealed class Installer : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration, IHostEnvironment environment)

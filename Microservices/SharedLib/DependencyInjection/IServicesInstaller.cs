@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace SharedLib.DependencyInjection;
 
-public interface IServiceInstaller
+public interface IServicesInstaller
 {
     void AddServices(
         IServiceCollection services,

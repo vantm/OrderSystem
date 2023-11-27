@@ -18,7 +18,7 @@ public class ProductRequestConsumer
 
         if (product == null)
         {
-            await context.RespondAsync(NotFound.Value);
+            await context.RespondAsync(NotFoundContract.Value);
         }
         else
         {

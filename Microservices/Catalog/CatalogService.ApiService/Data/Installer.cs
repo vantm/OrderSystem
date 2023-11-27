@@ -5,7 +5,7 @@ using SharedLib.DependencyInjection;
 
 namespace CatalogService.ApiService.Data;
 
-public class Installer : IServiceInstaller
+public class Installer : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration, IHostEnvironment environment)
