@@ -3,19 +3,17 @@
 using Microsoft.Extensions.Options;
 
 using SharedLib.DependencyInjection;
-using SharedLib.Options;
 
-namespace CatalogService.ApiService.MassTransit;
+namespace IdentityService.ApiService.MassTransit;
 
-public sealed class Installer : IServicesInstaller
+public sealed class MassTransitServicesInstaller : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration, IHostEnvironment environment)
     {
-        services.AddOptions<GrpcTransportOptions>()
-            .BindConfiguration(GrpcTransportOptions.Name)
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
+        services.AddOptionsWithValidateOnStart<MassTransitModuleOptions>()
+            .BindConfiguration(MassTransitModuleOptions.Name)
+            .ValidateDataAnnotations();
 
         services.AddMassTransit(x =>
         {
@@ -25,19 +23,18 @@ public sealed class Installer : IServicesInstaller
             x.AddActivitiesFromNamespaceContaining<ProjectRoot>();
             x.AddFuturesFromNamespaceContaining<ProjectRoot>();
 
-            x.UsingGrpc((ctx, cfg) =>
+            x.UsingRabbitMq((ctx, cfg) =>
             {
-                var options =
-                    ctx.GetRequiredService<IOptions<GrpcTransportOptions>>();
+                var options = ctx
+                    .GetRequiredService<IOptions<MassTransitModuleOptions>>()
+                    .Value;
 
-                cfg.Host(options.Value.Host, c =>
+                cfg.Host(options.Host, r =>
                 {
-                    foreach (Uri server in options.Value.Servers)
-                    {
-                        c.AddServer(server);
-                    }
+                    r.Username(options.Username);
+                    r.Password(options.Password);
                 });
-
+                
                 cfg.ConfigureEndpoints(ctx);
             });
         });

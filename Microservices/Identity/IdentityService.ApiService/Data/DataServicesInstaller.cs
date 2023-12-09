@@ -5,7 +5,7 @@ using SharedLib.DependencyInjection;
 
 namespace IdentityService.ApiService.Data;
 
-public class Installer : IServicesInstaller
+public class DataServicesInstaller : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration, IHostEnvironment environment)

@@ -3,9 +3,9 @@
 using SharedLib.Data;
 using SharedLib.DependencyInjection;
 
-namespace OrderService.ApiService.Data;
+namespace InventoryService.ApiService.Data;
 
-public class Installer : IServicesInstaller
+public class DataServicesInstaller : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration, IHostEnvironment environment)

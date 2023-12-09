@@ -10,7 +10,7 @@ using SharedLib.DependencyInjection;
 
 namespace SharedLib.FluentValidation;
 
-public class FluentValidationInstaller : IServicesInstaller
+public class FluentValidationServicesInstaller : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration,

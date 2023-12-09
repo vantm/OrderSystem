@@ -6,7 +6,7 @@ using SharedLib.DependencyInjection;
 
 namespace SharedLib.Swagger;
 
-public class SwaggerModule : IServicesInstaller
+public class SwaggerServicesInstaller : IServicesInstaller
 {
     public void AddServices(IServiceCollection services,
         IConfiguration configuration,

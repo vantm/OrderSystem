@@ -1,5 +1,3 @@
 ﻿namespace CatalogService.Contracts.Products;
 
-public record ProductRequest(Guid Id)
-{
-}
+public record ProductRequest(Guid Id);

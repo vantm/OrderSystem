@@ -8,7 +8,7 @@ using SharedLib.DependencyInjection;
 
 namespace SharedLib.MediatR;
 
-public class MediatRInstaller : IServicesInstaller
+public class MediatRServicesInstaller : IServicesInstaller
 {
     public void AddServices(
         IServiceCollection services,

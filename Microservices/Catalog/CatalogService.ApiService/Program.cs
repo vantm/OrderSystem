@@ -18,8 +18,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpLogging();
 
-app.MapGet("/", () => "Hello World!");
-
 app.MapCarter();
 
 app.Run();

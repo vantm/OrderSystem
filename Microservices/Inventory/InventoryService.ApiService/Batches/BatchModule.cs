@@ -2,9 +2,9 @@
 
 namespace InventoryService.ApiService.Batches;
 
-public class Module : CarterModule
+public class BatchModule : CarterModule
 {
-    public Module() : base("/batches")
+    public BatchModule() : base("/batches")
     {
     }
 
