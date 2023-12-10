@@ -3,26 +3,33 @@ using System.Text;
 
 namespace IdentityService.ApiService.Users.Domain;
 
-public record HashedPassword(byte[] PassHash, byte[] PassSalt)
+public record HashedPassword
 {
-    public static readonly HashedPassword Empty = new();
+    public static readonly HashedPassword Empty = new()
+    {
+        HashedValue = Array.Empty<byte>(),
+        Salt = Array.Empty<byte>()
+    };
 
-    private HashedPassword() : this(Array.Empty<byte>(), Array.Empty<byte>())
+    public required byte[] HashedValue { get; init; }
+    public required byte[] Salt { get; init; }
+
+    private HashedPassword()
     {
     }
 
     public bool IsMatch(string password)
     {
-        var passHash = Hash(password, PassSalt);
-        return passHash.SequenceEqual(PassHash);
+        var passHash = Hash(password, Salt);
+        return passHash.SequenceEqual(HashedValue);
     }
 
     public static HashedPassword Create(string password, int saltLength = 128)
     {
         var salt = CreateSalt(saltLength);
-        var hashed = Hash(password, salt);
+        var hashedPass = Hash(password, salt);
 
-        return new(hashed, salt);
+        return new() { HashedValue = hashedPass, Salt = salt };
     }
 
     private static byte[] CreateSalt(int length)

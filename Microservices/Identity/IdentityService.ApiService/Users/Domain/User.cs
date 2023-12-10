@@ -26,8 +26,8 @@ public class User : Entity
         {
             Id = Guid.NewGuid(),
             UserName = userName.Value,
-            PasswordHash = password.PassHash,
-            PasswordSalt = password.PassHash,
+            PasswordHash = password.HashedValue,
+            PasswordSalt = password.HashedValue,
             FullName = fullName.Value,
             EmailAddress = emailAddress.Value,
             IsActive = isActive,

@@ -35,16 +35,17 @@ public class UserModule : CarterModule
             var result = req.Validate(newInfo);
             if (!result.IsValid)
             {
-                return Results.ValidationProblem(result.GetValidationProblems());
+                return Results.ValidationProblem(
+                    result.GetValidationProblems());
             }
 
             var hashedPassword = HashedPassword.Create(newInfo.Password);
 
             var entity = User.New(
-                new UserName(newInfo.UserName),
+                UserName.New(newInfo.UserName),
                 hashedPassword,
-                new FullName(newInfo.FullName),
-                new EmailAddress(newInfo.EmailAddress),
+                FullName.New(newInfo.FullName),
+                EmailAddress.New(newInfo.EmailAddress),
                 newInfo.IsActive);
 
             await userRepo.InsertAsync(entity, cancellationToken);
