@@ -3,11 +3,9 @@ using FluentValidation.Results;
 
 using MediatR;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SharedLib.Contracts;
 
-namespace SharedLib.MediatR;
+namespace InventoryService.ApiService.MediatR;
 
 public sealed class ValidateRequestPipelineBehavior<TRequest, TResponse>(
         IServiceScopeFactory serviceScopeFactory)

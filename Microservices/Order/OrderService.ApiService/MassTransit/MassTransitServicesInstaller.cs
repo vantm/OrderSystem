@@ -34,7 +34,7 @@ public sealed class MassTransitServicesInstaller : IServicesInstaller
                     r.Username(options.Username);
                     r.Password(options.Password);
                 });
-                
+
                 cfg.ConfigureEndpoints(ctx);
             });
         });

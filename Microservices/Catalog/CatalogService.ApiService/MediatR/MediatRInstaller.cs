@@ -1,14 +1,10 @@
 ﻿using System.Reflection;
 
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 using SharedLib.DependencyInjection;
 
-namespace SharedLib.MediatR;
+namespace CatalogService.ApiService.MediatR;
 
-public class MediatRServicesInstaller : IServicesInstaller
+public class MediatRInstaller : IServicesInstaller
 {
     public void AddServices(
         IServiceCollection services,

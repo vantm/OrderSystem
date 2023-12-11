@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace CatalogService.ApiService.Products.DomainEvents;
+﻿namespace CatalogService.ApiService.Products.Domain;
 
 public record ProductDeletedDomainEvent : INotification
 {

@@ -1,4 +1,6 @@
-﻿using MassTransit;
+﻿using IdentityService.ApiService.MassTransit.Options;
+
+using MassTransit;
 
 using Microsoft.Extensions.Options;
 

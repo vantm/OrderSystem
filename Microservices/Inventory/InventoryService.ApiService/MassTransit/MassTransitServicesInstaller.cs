@@ -1,4 +1,6 @@
-﻿using MassTransit;
+﻿using InventoryService.ApiService.MassTransit.Options;
+
+using MassTransit;
 
 using Microsoft.Extensions.Options;
 

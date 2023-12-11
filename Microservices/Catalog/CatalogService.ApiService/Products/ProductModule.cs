@@ -1,9 +1,6 @@
 ﻿using Carter;
-using Carter.ModelBinding;
 
 using CatalogService.ApiService.Products.Commands;
-using CatalogService.ApiService.Products.Domain;
-using CatalogService.ApiService.Products.Models;
 using CatalogService.ApiService.Products.Queries;
 
 using SharedLib.Extensions;

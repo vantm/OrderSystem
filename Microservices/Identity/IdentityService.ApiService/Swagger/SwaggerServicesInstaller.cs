@@ -1,10 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using SharedLib.DependencyInjection;
 
-using SharedLib.DependencyInjection;
-
-namespace SharedLib.Swagger;
+namespace IdentityService.ApiService.Swagger;
 
 public class SwaggerServicesInstaller : IServicesInstaller
 {

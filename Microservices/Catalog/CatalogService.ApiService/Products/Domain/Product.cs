@@ -1,7 +1,5 @@
 ﻿using System.Text;
 
-using CatalogService.ApiService.Products.DomainEvents;
-
 using SharedLib.Domain;
 
 namespace CatalogService.ApiService.Products.Domain;

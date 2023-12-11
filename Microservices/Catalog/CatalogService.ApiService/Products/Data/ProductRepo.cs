@@ -3,10 +3,7 @@ using CatalogService.ApiService.Products.Models;
 
 using Dapper;
 
-using MediatR;
-
 using SharedLib.Data;
-using SharedLib.Logging;
 
 namespace CatalogService.ApiService.Products.Data;
 
