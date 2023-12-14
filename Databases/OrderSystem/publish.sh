@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DACPAC=bin/Debug/OrderSystem.dacpac
-CONNSTR=Server=localhost;Database=OrderSystem;User\ ID=sa;Password=P@ssw0rd;TrustServerCertificate=True
 
 if [ "$1" != "--no-build" ]; then
     dotnet build -c Debug
