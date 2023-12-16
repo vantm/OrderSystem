@@ -17,9 +17,9 @@ public record UserCreatedDomainEvent : INotification
         return new()
         {
             Id = user.Id,
-            UserName = user.UserName,
-            FullName = user.FullName,
-            EmailAddress = user.EmailAddress,
+            UserName = user.UserName.Value,
+            FullName = user.FullName.Value,
+            EmailAddress = user.Email.Value,
             IsActive = user.IsActive,
             CreatedAt = user.CreatedAt
         };

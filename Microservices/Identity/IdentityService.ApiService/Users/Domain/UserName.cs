@@ -1,15 +1,12 @@
 ﻿namespace IdentityService.ApiService.Users.Domain;
 
-public sealed class UserName
+public sealed record UserName(string Value)
 {
-    private UserName() { }
-
-    public string Value { get; private set; } = default!;
+    public string Value { get; } = Value;
 
     public static UserName New(string userName)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(userName, nameof(userName));
-
-        return new() { Value = userName };
+        return new(userName);
     }
 }

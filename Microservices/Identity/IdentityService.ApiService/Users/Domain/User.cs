@@ -1,15 +1,16 @@
-﻿using SharedLib.Domain;
+﻿using IdentityService.ApiService.Users.Dto;
+
+using SharedLib.Domain;
 
 namespace IdentityService.ApiService.Users.Domain;
 
 public class User : Entity
 {
     public Guid Id { get; private set; }
-    public string UserName { get; private set; } = default!;
-    public byte[] PasswordHash { get; private set; } = default!;
-    public byte[] PasswordSalt { get; private set; } = default!;
-    public string FullName { get; private set; } = default!;
-    public string EmailAddress { get; private set; } = default!;
+    public UserName UserName { get; private set; }
+    public HashedPassword Password { get; private set; }
+    public FullName FullName { get; private set; }
+    public EmailAddress Email { get; set; }
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
@@ -19,17 +20,16 @@ public class User : Entity
         UserName userName,
         HashedPassword password,
         FullName fullName,
-        EmailAddress emailAddress,
+        EmailAddress email,
         bool isActive)
     {
         var user = new User()
         {
             Id = Guid.NewGuid(),
-            UserName = userName.Value,
-            PasswordHash = password.HashedValue,
-            PasswordSalt = password.HashedValue,
-            FullName = fullName.Value,
-            EmailAddress = emailAddress.Value,
+            UserName = userName,
+            Password = password,
+            FullName = fullName,
+            Email = email,
             IsActive = isActive,
             CreatedAt = DateTime.UtcNow
         };
@@ -41,22 +41,33 @@ public class User : Entity
         return user;
     }
 
+    internal static User Restore(UserDto dto)
+    {
+        return new User()
+        {
+            Id = dto.Id,
+            UserName = UserName.New(dto.UserName),
+            Password =
+                new HashedPassword(dto.PasswordHash, dto.PasswordSalt)
+        };
+    }
+
     public void Update(FullName fullName, bool isActive)
     {
-        if (FullName == fullName.Value)
+        if (FullName == fullName)
         {
             return;
         }
 
-        var previousFullName = FullName;
-        var previousIsActive = IsActive;
+        var prevFullName = fullName;
+        var prevIsActive = IsActive;
 
-        FullName = fullName.Value;
+        FullName = fullName;
         IsActive = isActive;
         UpdatedAt = DateTime.UtcNow;
 
         var domainEvent = UserUpdatedDomainEvent.FromEntity(
-            this, previousFullName, previousIsActive);
+            this, prevFullName.Value, prevIsActive);
 
         AddDomainEvent(domainEvent);
     }

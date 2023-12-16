@@ -1,4 +1,5 @@
 ﻿using IdentityService.ApiService.Users.Domain;
+using IdentityService.ApiService.Users.Dto;
 using IdentityService.Contracts;
 
 namespace IdentityService.ApiService.Users;
@@ -9,9 +10,9 @@ public static class Mapper
     {
         return new(
             entity.Id,
-            entity.UserName,
-            entity.FullName,
-            entity.EmailAddress,
+            entity.UserName.Value,
+            entity.FullName.Value,
+            entity.Email.Value,
             entity.IsActive,
             entity.CreatedAt,
             entity.UpdatedAt);

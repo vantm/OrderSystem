@@ -3,20 +3,10 @@ using System.Text;
 
 namespace IdentityService.ApiService.Users.Domain;
 
-public record HashedPassword
+public record HashedPassword(byte[] HashedValue, byte[] Salt)
 {
-    public static readonly HashedPassword Empty = new()
-    {
-        HashedValue = Array.Empty<byte>(),
-        Salt = Array.Empty<byte>()
-    };
-
-    public required byte[] HashedValue { get; init; }
-    public required byte[] Salt { get; init; }
-
-    private HashedPassword()
-    {
-    }
+    public static readonly HashedPassword Empty =
+        new(Array.Empty<byte>(), Array.Empty<byte>());
 
     public bool IsMatch(string password)
     {
@@ -28,8 +18,7 @@ public record HashedPassword
     {
         var salt = CreateSalt(saltLength);
         var hashedPass = Hash(password, salt);
-
-        return new() { HashedValue = hashedPass, Salt = salt };
+        return new(hashedPass, salt);
     }
 
     private static byte[] CreateSalt(int length)

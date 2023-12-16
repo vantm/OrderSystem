@@ -29,7 +29,7 @@ public class UserRequestConsumer : IConsumer<UserRequest>
         {
             var reply = new UserReply(
                 user.Id,
-                user.UserName,
+                user.UserName.Value,
                 user.IsActive);
 
             await context.RespondAsync(reply);

@@ -7,4 +7,7 @@ public record UserModel(
     string EmailAddress,
     bool IsActive,
     DateTime CreatedAt,
-    DateTime UpdatedAt);
+    DateTime UpdatedAt)
+{
+    
+}

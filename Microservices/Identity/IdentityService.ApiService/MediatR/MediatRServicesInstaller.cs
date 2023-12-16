@@ -15,7 +15,7 @@ public class MediatRServicesInstaller : IServicesInstaller
         {
             Assembly[] assemblies = new[]
             {
-                Assembly.GetEntryAssembly()!, Assembly.GetEntryAssembly()!
+                Assembly.GetEntryAssembly()!,
             };
 
             c.RegisterServicesFromAssemblies(assemblies);

@@ -15,15 +15,16 @@ public class UserDeletedDomainEvent : INotification
     {
         if (!user.DeletedAt.HasValue)
         {
-            throw new InvalidOperationException("User wasn't marked as deleted");
+            throw new InvalidOperationException(
+                "User wasn't marked as deleted");
         }
 
         return new()
         {
             Id = user.Id,
-            UserName = user.UserName,
-            FullName = user.FullName,
-            EmailAddress = user.EmailAddress,
+            UserName = user.UserName.Value,
+            FullName = user.FullName.Value,
+            EmailAddress = user.Email.Value,
             IsActive = user.IsActive,
             DeletedAt = user.DeletedAt.Value
         };
